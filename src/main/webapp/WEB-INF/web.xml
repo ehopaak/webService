@@ -13,6 +13,7 @@
   	<servlet-class>com.shinhan.controller.FirstServlet</servlet-class>
   </servlet>
   
+  
   <servlet-mapping>
   	<servlet-name>servlet1</servlet-name>
   	<url-pattern>/FirstServlet</url-pattern>
