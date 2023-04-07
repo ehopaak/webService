@@ -2,42 +2,92 @@ package com.shinhan.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.shinhan.model.AdminService;
 import com.shinhan.vo.AdminVO;
 
-@WebServlet("/auth/loginCheck.do") //URL mapping 주소 정의
+/**
+ *http://localhost:9090/webShop 
+ */
+@WebServlet({"/auth/loginCheck.do"})//URL mapping주소 정의
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//<input name = "email">
-		//<input name = "pass">
+	
+	protected void doGet(HttpServletRequest request, 
+			HttpServletResponse response) throws ServletException, IOException {
+		ServletContext app =  request.getServletContext();
+		Object obj = app.getAttribute("visitor");
+		int count=1;
+		if(obj != null) {
+			count = (Integer)obj;
+			count++;
+		}
+		app.setAttribute("visitor", count);
+		
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("login.jsp");
+		rd.forward(request, response);
+	}
+	
+	
+	protected void doPost(HttpServletRequest request, 
+			HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("getRemoteAddr:" + request.getRemoteAddr());
+        //<input name="email">
+		//<input name="pass"
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
-		
 		AdminService service = new AdminService();
 		AdminVO admin = service.loginCheck(email, pass);
-		System.out.println(admin == null?"로그인실패":admin);
+		System.out.println(admin==null?"로그인실패":admin);
 		
-		//응답문서 만들기
+		//응답문서만들기  header + ResponseBody에 문자열을 출력하기 
+		//<meta   charset="UTF-8">
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		
 		if(admin==null) {
+			//응답문서에 header부분을 작성해서 내려간다. 아래부분코드는 3초후 재요청한다는 의미이다.
+			response.setHeader("refresh", "3;loginCheck.do" );
 			out.print("<h1>Login Fail</h1>");
 			return;
 		}
 		
+		//로그인한 사람의 정보를 저장하기
+		HttpSession session = request.getSession();
+		session.setAttribute("loginUser", admin);
 		
-		out.print("<h1>Login Information</h1>");
-		out.printf("<h1>이메일은 %s</h1>", email);
-		out.printf("<h1>이름은 %s</h1>", admin.getManager_name());
+		//응답문서에 주소창을 바꾼다.
+		String path = request.getContextPath();
+		String encodeName = URLEncoder.encode(admin.getManager_name(),"utf-8");
+		response.sendRedirect(path + "/emp/emplist.do?myname=" + encodeName);
+		
+		//재요청
+//		out.print("<script>"
+//				+ "alert('로그인성공');"
+//				+ "location.href='"
+//				+ path
+//				+ "/emp/emplist.do';"
+//				+ "</script>");
+		
+		
+		
 	}
-
+	
 
 }
+
+
+
+
+

@@ -11,10 +11,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-//DTO,VO,JavaBeans : data를 저장해서 전송하기위해
+//DTO,VO,JavaBeans : data를 저장해서 전송하기위해 
 public class AdminVO {
 	private String email;
 	private String manager_name;
 	private String pass;
-
 }
+
+ 
