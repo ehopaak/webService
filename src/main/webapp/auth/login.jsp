@@ -72,7 +72,6 @@ $(function(){
       <input type="password" name="pass"   placeholder="Password" />
       <a href="#">Forgot your password?</a>
       <button>Sign In</button>
-      
     </form>
   </div>
   <div class="overlay-container">

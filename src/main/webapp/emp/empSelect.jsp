@@ -42,6 +42,7 @@ List<EmpVO> emplist = (List<EmpVO>)request.getAttribute("empAll");
       	background-color: lightgreen;
       }
 </style>
+
 <script
   src="https://code.jquery.com/jquery-3.6.4.min.js" ></script>
   <script>
@@ -71,6 +72,10 @@ List<EmpVO> emplist = (List<EmpVO>)request.getAttribute("empAll");
 	   });
    });
   </script>
+  
+
+  
+  
   <script>
     function init(){
     	$("tr").css("background-color", "white")
@@ -134,12 +139,35 @@ List<EmpVO> emplist = (List<EmpVO>)request.getAttribute("empAll");
     	});
 
     });
+    
   </script>
+  
+  <script>
+  $(function(){
+	  $("#btnLogout").on("click",function(){
+			$.ajax({
+				url:"../auth/logout.do",
+				success:function(){
+					alert("로그아웃되었습니다.");
+				},
+				error:function(){
+					alert(message);
+					console.log(message)
+				}
+			
+			});
+		});
+	  
+  });
+  
+  </script>
+ 
 </head>
 <body>
 <div class="container mt-3">
 	<h1>직원목록</h1>
 	<div>로그인한 사용자: ${loginUser.manager_name} </div> 
+	<button id="btnLogout">로그아웃</button>
 	<button 
 	onclick="location.href='empinsert.do'"
 	type="button" class="btn btn-success">직원등록</button>
