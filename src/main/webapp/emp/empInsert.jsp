@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%
+//자바코드작성
+String subject = "jsp코드";
+
+int age = Integer.parseInt(request.getParameter("age"));
+%>
+<%!
+//자바코드작성..선언부...별도의 메서드로 만들어진다.
+int score=100;
+public int add(int a,int b){
+	return a+b;
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +25,13 @@
 </head>
 <body>
 <h1>직원정보 입력</h1>
-<!-- http://localhost:9999/ -->
+<%-- JSP주석 --%>
+<!-- service의 out.print에 들어감 -->
+subject : <%=subject %> <br>
+score : <%=score  %> <br>
+add : <%=add(100,200) %> <br>
+age : <%=age %>
+
 <form method="post"   action="<%=request.getContextPath()%>/emp/empinsert.do" class="mb-3">
 <table >
   <tr  class="form-floating">
@@ -87,7 +106,6 @@
 	  document.getElementById("here").innerHTML = new Date();
 	  document.getElementById("employee_id").value = 888;
   }
-   
   
 </script>
 </body>

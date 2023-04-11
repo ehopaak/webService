@@ -15,7 +15,6 @@ List<EmpVO> emplist = (List<EmpVO>)request.getAttribute("empAll");
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-
 	#container { 
         width:1200px;  
         padding:15px;  
@@ -23,9 +22,10 @@ List<EmpVO> emplist = (List<EmpVO>)request.getAttribute("empAll");
       }
 	@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 	h1{
+		text-align: center;
+		box-shadow: 5px 5px 10px gray;
 		font-family: 'Jeju Gothic', sans-serif;
-		border: 2px solid black; 
-  		padding: 10px; 
+  		padding: 5px 15px 5px 15px; 
   		margin: 10px; 
 	}
 	.align-left {text-align:left;}
@@ -166,13 +166,13 @@ List<EmpVO> emplist = (List<EmpVO>)request.getAttribute("empAll");
 <body>
 <div class="container mt-3">
 	<h1>직원목록</h1>
-	<div>로그인한 사용자: ${loginUser.manager_name} </div> 
+	<!-- include 디렉티브는 소스를 합쳐서 컴파일한다. -->
+	<%@ include file="../common/header.jsp" %>
 	<button id="btnLogout">로그아웃</button>
 	<button 
 	onclick="location.href='empinsert.do'"
 	type="button" class="btn btn-success">직원등록</button>
 	
-	<a type="button" class="btn btn-success" href="empinsert.do">직원등록</a>
 	<hr>
 	<button id="btn1">짝수row선택</button>
 	<button id="btn2">이름 S로 시작하는 직원</button>
