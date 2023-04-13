@@ -32,6 +32,16 @@ public class FrontController extends HttpServlet {
 		
 		
 		switch (path) {
+		case "/download.do":
+			data.put("response", response);
+			controller = new DownloadController();
+			break;
+		case "/upload.do":
+			controller = new UploadController();
+			break;
+		case "/jstl.do":
+			controller = new JSTLController();
+			break;
 		case "/auth/loginCheck.do":
 			controller = new LoginController();
 			break;
@@ -53,6 +63,9 @@ public class FrontController extends HttpServlet {
 		case "/auth/emailDupCheck.do":
 			controller = new EmailDupCheckController();
 			break;
+		case "/auth/logout.do":
+			controller = new LogOutController();
+			break;
 		default:
 			break;
 		}
@@ -71,6 +84,8 @@ public class FrontController extends HttpServlet {
 			response.sendRedirect(page.substring(9));
 		}else if(page.indexOf("responseBody:")>=0) {
 			response.getWriter().append(page.substring(13));
+		}else if(page.indexOf("download")>=0) {
+			
 		}
 		
 		else {

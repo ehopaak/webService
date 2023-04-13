@@ -1,27 +1,20 @@
-package com.shinhan.controller2;
+package com.shinhan.frontcontrollerpattern;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.shinhan.vo.AdminVO;
 
-/**
- * Servlet implementation class LogoutServlet
- */
-//@WebServlet("/auth/logout.do")
-public class LogoutServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class LogOutController implements CommonControllerInterface {
+
+	@Override
+	public String excute(Map<String, Object> data) throws Exception {
+		HttpServletRequest request = (HttpServletRequest)data.get("request");
+		
 		
 		ServletContext app = request.getServletContext();
 		HttpSession session =  request.getSession();
@@ -35,9 +28,9 @@ public class LogoutServlet extends HttpServlet {
 				userList.remove(admin);
 				app.setAttribute("userList", userList);
 			} 
+			
 		request.getSession(false).invalidate();
-		
+		return "responseBody:OK";
 	}
-
 
 }

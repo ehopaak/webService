@@ -41,7 +41,7 @@ $(function(){
 <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
 <div class="container" id="container">
   <div class="form-container sign-up-container">
-    <form method="post"   action="<%=request.getContextPath()%>/auth/signup.do" >
+    <form method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/auth/signup.do" >
       <h1>Create Account</h1>
       <div class="social-container">
         <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -54,7 +54,7 @@ $(function(){
       <span id="message">!!</span>
       <input type="button" id="emailDupCheck" value="중복체크" /> 
       <input type="password" name="pass" placeholder="Password" />
-      
+      <input type="file" name="pic">
       <button >Sign Up</button>
     </form>
   </div>
@@ -70,6 +70,7 @@ $(function(){
       <span>or use your account</span>
       <input type="email"  name="email"    placeholder="Email" />
       <input type="password" name="pass"   placeholder="Password" />
+      
       <a href="#">Forgot your password?</a>
       <button>Sign In</button>
     </form>

@@ -4,7 +4,7 @@
 //자바코드작성
 String subject = "jsp코드";
 
-int age = Integer.parseInt(request.getParameter("age"));
+//int age = Integer.parseInt(request.getParameter("age"));
 %>
 <%!
 //자바코드작성..선언부...별도의 메서드로 만들어진다.
@@ -18,9 +18,8 @@ public int add(int a,int b){
 <head>
 <meta charset="UTF-8">
 <title>직원등록1</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<%@ include file="../common/commonfiles.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
 </head>
 <body>
@@ -30,7 +29,7 @@ public int add(int a,int b){
 subject : <%=subject %> <br>
 score : <%=score  %> <br>
 add : <%=add(100,200) %> <br>
-age : <%=age %>
+<%--age : <%=age %> --%>
 
 <form method="post"   action="<%=request.getContextPath()%>/emp/empinsert.do" class="mb-3">
 <table >
