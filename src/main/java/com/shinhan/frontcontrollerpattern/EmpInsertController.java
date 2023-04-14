@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.shinhan.model.CompanyService;
 import com.shinhan.model.EmpService;
 import com.shinhan.util.DateUtil;
 import com.shinhan.vo.EmpVO;
@@ -17,6 +18,7 @@ public class EmpInsertController implements CommonControllerInterface {
 		String page = "empInsert.jsp";
 		String method = (String)data.get("method");
 		HttpServletRequest request = (HttpServletRequest)data.get("request");
+		
 		if(method.equals("POST")) {
 			//입력된 파라메터를 읽어서 DB에 저장하기위해옴 
 			EmpVO emp = makeEmp(request);
@@ -25,6 +27,11 @@ public class EmpInsertController implements CommonControllerInterface {
 			
 			//재요청하기:Browser로 내려가서 새로운 요청으로 가기 
 			page = "redirect:emplist.do";
+		} else {
+			CompanyService service = new CompanyService();
+			request.setAttribute("deptList", service.deptSelectAll());
+			request.setAttribute("managerList", service.managerSelectAll());
+			request.setAttribute("jobList", service.jobSelectAll());
 		}
 		
 		return page;

@@ -1,4 +1,6 @@
 package com.shinhan.model;
+import java.util.List;
+
 import com.shinhan.vo.AdminVO;
 public class AdminService {
 	AdminDAO dao = new AdminDAO();
@@ -14,4 +16,8 @@ public class AdminService {
 	public AdminVO loginCheck(String email, String pass) {
 		return dao.loginCheck(email, pass);
 	}	
+	
+	 public List<AdminVO> adminList() {
+		 return dao.adminList();
+	 }
 }

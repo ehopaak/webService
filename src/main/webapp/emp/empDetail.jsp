@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>직원상세보기</title>
 <%@ include file="../common/commonfiles.jsp" %>
+<%@ include file="../common/header.jsp" %>
 
   <style>
     #container{
@@ -69,11 +70,27 @@
 	  </tr>
 	  <tr>
 	    <td>부서</td>
-	    <td><input type="number" name="department_id" value=${emp.department_id }></td>
+	    <td>
+	    <select name="department_id">
+    	<c:forEach items="${deptList }" var="dept">
+    		<option ${emp.department_id== dept.department_id?"selected":""} 
+    		value="${dept.department_id }">${dept.department_name }</option>
+    	</c:forEach>
+    	</select>
+	    
+	    <%-- <input type="number" name="department_id" 
+	    value=${emp.department_id }> --%>
+	    </td>
 	  </tr>
 	  <tr>
 	    <td>메니져</td>
-	    <td><input type="number" name="manager_id"  value=${emp.manager_id }></td>
+	    <td>
+    	<select name="manager_id">
+    		<c:forEach items="${managerList }" var="manager">
+    			<option value="${manager.employee_id }">${manager.first_name }--${manager.first_name }</option>
+    		</c:forEach>
+    	</select>
+    </td>
 	  </tr>
 	  <tr>
 	    <td>커미션</td>
@@ -87,7 +104,14 @@
 	  </tr>
 	  <tr>
 	    <td>직급</td>
-	    <td><input type="text" name="job_id" value=${emp.job_id } required="required" ></td>
+	    <td>
+	    <select name="job_id">
+    		<c:forEach items="${jobList }" var="job">
+    			<option ${emp.job_id==job.job_id?"selected":"" } 
+    			value="${job.job_id }">${job.job_title }</option>
+    		</c:forEach>
+    	</select>
+	    </td>
 	  </tr>
 	  <tr style="text-align: center;">
 	    <td colspan="2">
